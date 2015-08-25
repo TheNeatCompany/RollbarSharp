@@ -10,18 +10,6 @@ namespace RollbarSharp.Builders
     public static class RequestModelBuilder
     {
         /// <summary>
-        /// Converts the current standard <see cref="HttpRequest"/> to a <see cref="RequestModel"/>
-        /// Copies over: URL, HTTP method, HTTP headers, query string params, POST params, user IP, route params
-        /// </summary>
-        /// <returns></returns>
-        public static RequestModel CreateFromCurrentRequest(string[] scrubParams = null)
-        {
-            var cx = HttpContext.Current;
-
-            return cx == null ? new RequestModel() : CreateFromHttpRequest(cx.Request, cx.Session, scrubParams);
-        }
-
-        /// <summary>
         /// Converts a standard <see cref="HttpRequest"/> to a <see cref="RequestModel"/>
         /// Copies over: URL, HTTP method, HTTP headers, query string params, POST params, user IP, route params
         /// </summary>
@@ -50,7 +38,7 @@ namespace RollbarSharp.Builders
             // that will be the true remote IP of a user behind a proxy server or load balancer
             m.UserIp = IpFromXForwardedFor(request) ?? request.UserHostAddress;
 
-            m.Parameters = request.RequestContext.RouteData.Values.ToDictionary(v => v.Key, v => v.Value.ToString());
+            m.Parameters = request.RequestContext.RouteData.Values.ToDictionary(v => v.Key, v => v.Describe());
 
             if (scrubParams != null)
             {

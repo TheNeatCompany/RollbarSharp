@@ -1,5 +1,10 @@
 # RollbarSharp
 
+[![Build status](https://ci.appveyor.com/api/projects/status/m8wevja31t9fh2i3?svg=true)](https://ci.appveyor.com/project/AlbertoMonteiro/rollbarsharp)
+[![NuGet version](http://img.shields.io/nuget/v/Rollbarsharp.svg)](http://www.nuget.org/packages/RollbarSharp/)
+[![Nuget downloads](http://img.shields.io/nuget/dt/Rollbarsharp.svg)](http://www.nuget.org/packages/RollbarSharp/)
+
+
 .NET bindings for [Rollbar](http://www.rollbar.com).
 
 I'm not affiliated with Rollbar, I just like their service.
@@ -124,25 +129,15 @@ You'll need to add the [NLog.RollbarSharp](https://github.com/mroach/NLog.Rollba
 
 ## Building
 
-I'm using [Albacore](http://albacorebuild.net/) for managing the build and bundling process. You'll need Ruby on your system to use it.
+I'm using [ScriptCs](http://scriptcs.net/) for managing the build process.
 
-Installing the necessary gems (you only need to do this once):
-
-```
-gem install albacore version_bumper
-```
-
-Fetch nuget dependencies (from the `build` directory):
+To build go to **build** folder and then run this command:
 
 ```
-rake fetch_packages
+scriptcs -script build.csx
 ```
 
-And finally, building:
-
-```
-rake build
-```
+After that, upload new **RollbarSharp.{version}.nupkg** to nuget.
 
 ## TODO
 
